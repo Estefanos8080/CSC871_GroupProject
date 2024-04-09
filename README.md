@@ -44,7 +44,3 @@ Instructions:
 License
     
     This project is licensed under the MIT License: https://opensource.org/licenses/MIT.
-
-torch  # PyTorch for deep learning
-numpy  # Numerical computing library
-matplotlib  # Plotting library
