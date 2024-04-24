@@ -22,14 +22,14 @@ class BrainDataset:
             if not (self.data_dir / "brain").exists():
                 splitfolders.ratio(self.data_dir, output='brain', seed=20, ratio=(0.7, 0.1, 0.2))
 
-            # Define transformations for preprocessing images
+            # Resize images to a consistent size and Convert images to PyTorch tensors
             transform = transforms.Compose([
-                transforms.Resize((224, 224)),  # Resize images to a consistent size
-                transforms.ToTensor(),  # Convert images to PyTorch tensors
+                transforms.Resize((224, 224)),  
+                transforms.ToTensor(), 
             ])
 
             # Load the dataset using torchvision datasets.ImageFolder
-            self.train_dataset = datasets.ImageFolder(self.data_dir / 'brain/train', transform=transform)
+            self.train_dataset = datasets.ImageFolder(self.data_dir / '/brain/train', transform=transform)
             self.val_dataset = datasets.ImageFolder(self.data_dir / 'brain/val', transform=transform)
             self.test_dataset = datasets.ImageFolder(self.data_dir / 'brain/test', transform=transform)
 
@@ -75,7 +75,7 @@ class BrainDataset:
                 break
 
 
-data_dir = "/Users/estefanos/Desktop/Class Projects/Deep_learing/Group_Project/CSC671_GroupProject/CNN/Data_Set"
+data_dir = "/home/ubuntu/Project/GP/CSC671_GroupProject/CNN/Data_Set"
 brain_dataset = BrainDataset(data_dir)
 brain_dataset.preprocess_data()
 brain_dataset.get_dimensions()
