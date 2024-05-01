@@ -67,7 +67,7 @@ class BrainTumorClassifier:
         dataset = TensorDataset(images, labels)
         return dataset
 
-    def train_model(self, train_loader, validate_loader, num_epochs=50, lr=0.001):
+    def train_model(self, train_loader, validate_loader, num_epochs=5, lr=0.001):
         model = SimpleCNN().to(self.device)
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.Adam(model.parameters(), lr=lr)
@@ -127,16 +127,13 @@ class BrainTumorClassifier:
         # Collect system metrics
         cpu_usage = psutil.cpu_percent()
         mem_usage = psutil.virtual_memory().percent
-        gpu_usage = GPUtil.getGPUs()[0].load * 100  # Assuming only one GPU
-        gpu_mem_usage = GPUtil.getGPUs()[0].memoryUtil * 100  # Assuming only one GPU
+     
 
         # Log metrics into a file
-        with open('metrics.txt', 'w') as f:
+        with open('Running_Time.txt', 'w') as f:
             f.write(f'Total Running Time: {total_time} seconds\n')
             f.write(f'CPU Usage: {cpu_usage}%\n')
             f.write(f'Memory Usage: {mem_usage}%\n')
-            f.write(f'GPU Usage: {gpu_usage}%\n')
-            f.write(f'GPU Memory Usage: {gpu_mem_usage}%\n')
 
         # Save the model history
         model_history = {'train_losses': train_losses, 'val_losses': val_losses, 'train_accuracies': train_accuracies, 'val_accuracies': val_accuracies}
