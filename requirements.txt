@@ -1,3 +1,7 @@
 torch
 numpy
 matplotlib
+scikit-learn
+matplotlib
+psutil
+gputil

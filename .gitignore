@@ -4,3 +4,6 @@
 *.ptx
 *.cubin
 *.fatbin
+Data_Set/train/
+Data_Set/test/
+Data_Set/validate/
