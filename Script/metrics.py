@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix, f1_score, roc_curve, auc, roc_auc_score
 import numpy as np
 import seaborn as sns
-# Assuming `model` is your trained model and `test_loader` is your DataLoader for test data
+
 model.eval()  # Set the model to evaluation mode
 
 # Device configuration
@@ -84,7 +84,7 @@ def plot_confusion_matrix(cm, classes, title='Confusion Matrix', cmap=plt.cm.Blu
     plt.yticks(np.arange(len(classes)), classes, rotation=45)
     plt.show()
 
-# Assuming your classes are [0, 1]
+
 plot_confusion_matrix(conf_matrix, classes=[0, 1])
 
 with open('model_history.pkl', 'rb') as f:
