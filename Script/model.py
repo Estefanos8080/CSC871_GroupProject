@@ -4,6 +4,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader, TensorDataset
 from sklearn.metrics import confusion_matrix, accuracy_score
 import matplotlib.pyplot as plt
+import torch.nn.functional as F
 import os
 import glob
 import pickle
@@ -11,9 +12,9 @@ import time
 import psutil
 import GPUtil
 
-class SimpleCNN(nn.Module):
+class CNN(nn.Module):
     def __init__(self):
-        super(SimpleCNN, self).__init__()
+        super(CNN, self).__init__()
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, stride=1, padding=1)
         self.conv3 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
@@ -21,15 +22,16 @@ class SimpleCNN(nn.Module):
         self.fc2 = nn.Linear(512, 2)
 
     def forward(self, x):
-        x = nn.functional.relu(self.conv1(x))
-        x = nn.functional.max_pool2d(x, kernel_size=2, stride=2)
-        x = nn.functional.relu(self.conv2(x))
-        x = nn.functional.max_pool2d(x, kernel_size=2, stride=2)
-        x = nn.functional.relu(self.conv3(x))
-        x = nn.functional.max_pool2d(x, kernel_size=2, stride=2)
+        x = F.relu(self.conv1(x))
+        x = F.max_pool2d(x, kernel_size=2, stride=2)
+        x = F.relu(self.conv2(x))
+        x = F.max_pool2d(x, kernel_size=2, stride=2)
+        x = F.relu(self.conv3(x))
+        x = F.max_pool2d(x, kernel_size=2, stride=2)
         x = x.view(-1, 64*28*28)
-        x = nn.functional.relu(self.fc1(x))
+        x = F.relu(self.fc1(x))
         x = self.fc2(x)
+        x = F.softmax(x, dim=1)
         return x
 
 class BrainTumorClassifier:
@@ -67,8 +69,8 @@ class BrainTumorClassifier:
         dataset = TensorDataset(images, labels)
         return dataset
 
-    def train_model(self, train_loader, validate_loader, num_epochs=5, lr=0.001):
-        model = SimpleCNN().to(self.device)
+    def train_model(self, train_loader, validate_loader, num_epochs=50, lr=0.001):
+        model = CNN().to(self.device)
         criterion = nn.CrossEntropyLoss()
         optimizer = optim.Adam(model.parameters(), lr=lr)
 

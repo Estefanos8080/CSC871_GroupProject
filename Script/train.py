@@ -15,7 +15,7 @@ class Train:
         self.batch_size = batch_size
         self.num_workers = num_workers
 
-    def train_model(self, num_epochs=5, lr=0.001):
+    def train_model(self, num_epochs=50, lr=0.001):
         classifier = BrainTumorClassifier(self.data_dir, self.batch_size, self.num_workers)
         train_loader, test_loader, validate_loader = classifier.load_data()
         model = classifier.train_model(train_loader, validate_loader, num_epochs, lr)

@@ -1,0 +1,3 @@
+Total Running Time: 3546.6423332691193 seconds
+CPU Usage: 99.6%
+Memory Usage: 67.3%

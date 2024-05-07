@@ -4,6 +4,7 @@
 *.ptx
 *.cubin
 *.fatbin
+.DS_Store
 Data_Set/train/
 Data_Set/test/
 Data_Set/validate/
