@@ -27,7 +27,7 @@ class CNN(nn.Module):
 # Instantiate the model
 model = CNN()
 
-# Create a dummy input tensor (batch_size, channels, height, width)
+# our input tensor 224*224 (batch_size, channels, height, width)
 input = torch.randn(1, 3, 224, 224)
 
 # Visualize the model using torchviz
